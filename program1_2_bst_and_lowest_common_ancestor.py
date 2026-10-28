@@ -1,0 +1,35 @@
+"""
+Experiment 8: Binary Search Trees
+Program 1 & 2: BST Construction and Lowest Common Ancestor
+Aim: Construct a BST and find the lowest common ancestor of two nodes.
+"""
+
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+def insert(root, value):
+    if root is None:
+        return Node(value)
+    if value < root.value:
+        root.left = insert(root.left, value)
+    elif value > root.value:
+        root.right = insert(root.right, value)
+    return root
+
+def lca(root, a, b):
+    while root:
+        if a < root.value and b < root.value:
+            root = root.left
+        elif a > root.value and b > root.value:
+            root = root.right
+        else:
+            return root.value
+    return None
+
+root = None
+for x in [50, 30, 70, 20, 40]:
+    root = insert(root, x)
+print(lca(root, 20, 40))
